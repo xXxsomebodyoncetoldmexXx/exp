@@ -1,20 +1,25 @@
 binwalk
+build-essential
 burpsuite
 dirb
 dosbox
 exiftool
 firefox
+firmware-realtek
 fish
 foremost
+gdb
 ghidra
 gmpy2
 htop
 idafreeware
 john the ripper
 libreoffice
+manpages-dev
 metasploit
 msf payload
 nmap
+pip
 pwndbg
 pwntools
 radare2
@@ -22,6 +27,9 @@ routersploit
 searchsploit
 subl
 testdisk
+vim
 virtualbox
 wireshark
 z3
+openjdk-<version>-jdk
+openjdk-<version>-doc
