@@ -1,4 +1,5 @@
 binwalk
+bs4
 build-essential
 burpsuite
 dirb
@@ -13,12 +14,15 @@ ghidra
 gmpy2
 htop
 idafreeware
+intel-microcode
 john the ripper
 libreoffice
 manpages-dev
 metasploit
 msf payload
 nmap
+openjdk-<version>-doc
+openjdk-<version>-jdk
 pip
 pwndbg
 pwntools
@@ -31,5 +35,4 @@ vim
 virtualbox
 wireshark
 z3
-openjdk-<version>-jdk
-openjdk-<version>-doc
+pngcheck
