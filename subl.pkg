@@ -1,0 +1,38 @@
+package control
+sidebar enhancement
+bracket highlighter
+jedi pythonautocompletion
+AdvancedNewFile
+fileicons
+autofilename
+
+====================================KEY MAP===============================================
+{ "keys": ["super+n"], "command": "advanced_new_file_new"},
+{	"keys": ["super+a"], "command": "reindent", "args": {"single_line": false}},
+
+====================================SETTING===============================================
+{
+	"auto_complete_commit_on_tab": true,
+	"auto_complete_cycle": true,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/Materialize/schemes/Material Behave.tmTheme",
+	"ensure_newline_at_eof_on_save": true,
+	"font_face": "Fira code",
+	"font_size": 16,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"indent_to_bracket": true,
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
+	"margin": 0,
+	"material_theme_contrast_mode": true,
+	"material_theme_small_statusbar": true,
+	"material_theme_tabs_autowidth": true,
+	"overlay_scroll_bars": "enabled",
+	"remember_full_screen": true,
+	"shift_tab_unindent": true,
+	"tab_size": 2,
+	"theme": "Material Behave.sublime-theme"
+}
