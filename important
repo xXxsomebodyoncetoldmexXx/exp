@@ -24,10 +24,12 @@ nmap
 openjdk-<version>-doc
 openjdk-<version>-jdk
 pip
+pngcheck
 pwndbg
 pwntools
 radare2
 routersploit
+rsync
 searchsploit
 subl
 testdisk
@@ -35,4 +37,3 @@ vim
 virtualbox
 wireshark
 z3
-pngcheck
