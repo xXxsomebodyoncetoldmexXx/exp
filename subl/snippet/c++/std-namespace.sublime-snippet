@@ -1,0 +1,8 @@
+<snippet>
+	<description>standard namespace</description>
+	<content><![CDATA[using namespace std;
+
+${0:/* code */}]]></content>
+	<tabTrigger>using</tabTrigger>
+	<scope>source.c, source.c++, source.objc, source.objc++</scope>
+</snippet>

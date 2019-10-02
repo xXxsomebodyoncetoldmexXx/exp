@@ -4,6 +4,7 @@ bracket highlighter
 jedi pythonautocompletion
 AdvancedNewFile
 autofilename
+package resource viewer
 
 ====================================KEY MAP===============================================
 { "keys": ["super+n"], "command": "advanced_new_file_new"},

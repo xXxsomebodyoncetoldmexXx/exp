@@ -1,0 +1,16 @@
+<snippet>
+	<description>template for competitive</description>
+	<content><![CDATA[#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(int argc, char const${TM_C_POINTER: *}argv[]) {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	${1:freopen("in", "r", stdin);}
+
+	${0:/* code */}
+}]]></content>
+	<tabTrigger>template</tabTrigger>
+	<scope>source.c++, source.objc++</scope>
+</snippet>

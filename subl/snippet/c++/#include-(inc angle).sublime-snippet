@@ -1,0 +1,7 @@
+<snippet>
+	<description>#include &lt;…&gt;</description>
+	<content><![CDATA[#include <${1:bits/stdc++.h}>
+${0:/* code */}]]></content>
+	<tabTrigger>inc</tabTrigger>
+	<scope>(source.c | source.objc | source.c++ | source.objc++) - meta.preprocessor.incomplete</scope>
+</snippet>
