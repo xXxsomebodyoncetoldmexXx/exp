@@ -1,3 +1,3 @@
 function car
-	g++ -Wall -Ofast $argv && echo "[RUN]" && ./a.out
+	g++ -Wall -Wextra -Werror -Ofast $argv && echo "[RUN]" && ./a.out
 end
