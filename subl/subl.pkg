@@ -7,8 +7,28 @@ autofilename
 package resource viewer
 
 ====================================KEY MAP===============================================
-{ "keys": ["super+n"], "command": "advanced_new_file_new"},
-{	"keys": ["super+a"], "command": "reindent", "args": {"single_line": false}},
+[
+	{ "keys": ["super+n"], "command": "advanced_new_file_new"},
+	{"keys": ["super+a"], "command": "reindent", "args": {"single_line": false}},
+	{
+		"keys": ["super+tab"],
+		"command": "move",
+		"args": {"by": "lines", "forward": true},
+		"context":
+		[
+			{ "key": "auto_complete_visible", "operator": "equal", "operand": true }
+		]
+	},
+	{
+		"keys": ["ctrl+tab"],
+		"command": "move",
+		"args": {"by": "lines", "forward": false},
+		"context":
+		[
+			{ "key": "auto_complete_visible", "operator": "equal", "operand": true }
+		]
+	},
+]
 
 ====================================SETTING===============================================
 {

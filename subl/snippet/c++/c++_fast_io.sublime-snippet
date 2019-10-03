@@ -2,7 +2,7 @@
 	<description>Fast input/output for c++</description>
 	<content><![CDATA[ios_base::sync_with_stdio(false);
 cin.tie(NULL);
-${1:freopen("in", "r", stdin);}
+${1:/*freopen("in", "r", stdin);*/}
 
 ${0:/* code */}
 ]]></content>
