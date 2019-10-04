@@ -1,10 +1,11 @@
 package control
 sidebar enhancement
 bracket highlighter
-jedi pythonautocompletion
 AdvancedNewFile
 autofilename
 package resource viewer
+materialize
+anaconda
 
 ====================================KEY MAP===============================================
 [
