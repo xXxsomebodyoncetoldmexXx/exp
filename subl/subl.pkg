@@ -55,5 +55,7 @@ anaconda
 	"remember_full_screen": true,
 	"shift_tab_unindent": true,
 	"tab_size": 2,
+	"pep8": false,
+	"anaconda_linter_mark_style": "none",
 	"theme": "Material Behave.sublime-theme"
 }
