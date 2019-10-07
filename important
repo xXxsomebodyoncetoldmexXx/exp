@@ -9,6 +9,8 @@ firefox
 firmware-realtek
 fish
 foremost
+g++-multilib
+gcc-multilib
 gdb
 ghidra
 gmpy2
