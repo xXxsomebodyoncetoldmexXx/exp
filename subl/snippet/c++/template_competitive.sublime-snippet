@@ -10,6 +10,7 @@ int main(int argc, char const${TM_C_POINTER: *}argv[]) {
 	${1:freopen("in", "r", stdin);}
 
 	${0:/* code */}
+	return 0;
 }]]></content>
 	<tabTrigger>template</tabTrigger>
 	<scope>source.c++, source.objc++</scope>
