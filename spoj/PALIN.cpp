@@ -11,10 +11,14 @@ using namespace std;
 #define CURTIME() cerr << el << "[TIME]: " << clock() * 1.0 / CLOCKS_PER_SEC << "s" << el
 #define INFILE(name) freopen(name, "r", stdin)
 #define OUFILE(name) freopen(name, "w", stdin)
+#define DEBUG cerr << "####################\nRunning on Line: " << __LINE__ << "\nIn Function: \t" << 	__FUNCTION__ << "\n####################\n"
+#define DUMP(name, value) cerr << "[ " << (name) << " ]: " << (value) << el
 #else
 #define CURTIME() ;
 #define INFILE(name) ;
 #define OUFILE(name) ;
+#define DEBUG ;
+#define DUMP(name, value) ;
 #endif
 
 #define FASTIO ios_base::sync_with_stdio(false),cin.tie(NULL)
@@ -26,7 +30,6 @@ using namespace std;
 #define lb lower_bound
 #define ub upper_bound
 #define prs(n) cout << fixed << setprecision(n)
-#define DEBUG(val) cerr << "#####\nRunning on Line " << __LINE__ << " in Function " << 	__FUNCTION__ << el << val << "#####";
 #define el "\n"
 #define sp " "
 
@@ -142,8 +145,11 @@ int main(int argc, char const *argv[]) {
 	ll T;
 	string s;
 	cin >> T;
+	DEBUG;
 	while(T--){
 		cin >> s;
+
+		DUMP("s", s);
 
 		if(allNine(s))
 			overStep(s);
