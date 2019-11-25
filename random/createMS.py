@@ -11,11 +11,16 @@ from time import sleep
 
 base = "https://codeforces.com/"
 contestName = input("Name of the contest: ")
-contestDuration = max(int('0' + input("Length (Default 5 Hours): ")), 300)
-numberOfContest = max(int('0' + input("Number of contest you want to combine: ")), 3)
+contestDuration = max(int('0' + input("Length (Default 1 Hours): ")), 60)
+numberOfContest = max(int('0' + input("Number of contest you want to combine (Default 1 contest): ")), 1)
 typeOfProblem = input("Type of problem you want to add: ").upper()
-Token = input("Please give the the token: ")
+contestLevel = int(input("Div 1 or 2: "))
+Token = input("Please give me the token: ")
 
+if(contestLevel == 1):
+  contestLevel = "(Div. 1)"
+else:
+  contestLevel = "(Div. 2)"
 if Token == "":
   print("")
   print("Seriously, well if that the case i gonna go to to sleep, bye!")
@@ -98,19 +103,19 @@ def makeMS(prob_list, userToken):
     r = s.post(base + "/data/mashup", data=form).text
     print(r)
 
+probList = []
 # MY MINI DATABASE - SAFE TIME TO LOOKUP
 with open("ContestList", "r") as f:
   for line in f:
-    if "(Div. 2)" in line:
+    if contestLevel in line:
       contestID = int(line.split("-")[0])
-      if contestID > 200:
+      if contestID > 400:
         probList.append(contestID)
 
 while True:
 
   # LIST OF CONTEST THAT HAVE BEEN ADD
   ig = list(map(int, open("ignoreCont").read().split("\n")[:-1]))
-  probList = []
 
   # GET CONTEST PROBLEM TYPE
   Tproblem = []
@@ -126,7 +131,7 @@ while True:
         filt.add(t["value"])
     for v in filt:
       Tproblem.append(f"{k}{v}")
-    # print(k, r.title.text)
+      # print(k, r.title.text)
     ig.append(k)
 
   # IDK, JUST TO MAKE IT MORE FUN ¯\_(ツ)_/¯
