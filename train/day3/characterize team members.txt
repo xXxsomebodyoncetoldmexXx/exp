@@ -1,0 +1,67 @@
+
+their POV:
+ ong:
+    + pros:
+      - can read the problem 
+      - can implement easy problem fast (less bug time)
+      - can implement ideas
+      - can give ideas for solutions
+      - less stress time
+    + cons:
+      - but sometime missing stuffs
+      - stupid about math, graph
+      - give complex ideas (and sometime stupid)
+ Lazy:
+    + pros:
+      - 
+    + cons:
+      - 
+ Duck:
+    + pros:
+      - can also read the problems but more carefulness
+      - can implement understanded problem/idea, not nessecary easy.
+      - medium at math, can do some simple math problem
+     + cons:
+      - the easier the problem, the more stress having thus missing the point of the problem
+      - become stupid when it come to fomula and similar stuff
+      - sometime thinking too complicate the easy problem but too simple for a hard problem
+=============================
+other's POV:
+ ong:
+  + Lazy's POV:
+    + pros:
+      - 
+    + cons:
+      - 
+  + Duck's POV:
+    + pros:
+      - 
+    + cons:
+      - 
+ 
+ Lazy:
+  + ong's POV:
+    + pros:
+      - easy with math, probability, classic problem
+      - fast at thinking ideas
+    + cons:
+      - hard to implement stuff
+      - need comfort environment to focus
+  + Duck's POV:
+    + pros:
+      - 
+    + cons:
+      - 
+ 
+ Duck:
+  + ong's POV:
+    + pros:
+      - can implement stuff
+      - can read the problems
+    + cons:
+      - get stupid, stressed when code is bugged
+  + Lazy's POV:
+    + pros:
+      - 
+    + cons:
+      - 
