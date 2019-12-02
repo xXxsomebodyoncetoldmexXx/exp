@@ -59,23 +59,42 @@
     INFILE("in");
     //OUFILE("out");
   
-    ll pos;
-    cin >> pos;
-    vector<ll> v(pos);
+    ll p;
+    cin >> p;
+    vector<ll> v(p);
     for(auto &i : v)
       cin >> i;
     sort(v.begin(), v.end());
-    for(ll i = 0; i < pos-1; i++){
-      v[i] = v[i+1] - v[i];
-    }
-    v.pop_back();
-    ll turn = 0;
-    ll head = 0;
-    bool base = false;
-    while((v.size()-turn) > 2){
 
+    ll ans = (1LL << 62);
+    ll median = v.size()/2;
+    for(ll i = 0; i < median; i++){
+      ans = min(ans, v[i+median] - v[i]);
     }
-        
+    cout << ans;
+    // deque<ll> pos;
+    // for(auto i : v)
+    //   pos.pb(i);
+    // while(pos.size() > 2){
+    //   // First half
+    //   ll first = pos.front();
+    //   pos.pop_front();
+    //   ll valF = pos.front() - first;
+    //   // Second half
+    //   ll second = pos.back();
+    //   pos.pop_back();
+    //   ll valS = second - pos.back();
+    //   if(valF > valS)
+    //     pos.pb(second);
+    //   else
+    //     pos.push_front(first);
+    //   for(auto i : pos)
+    //     cout << i << sp;
+    //   cout << el;
+    //   pos.erase(pos.begin() + (pos.size()/2));
+    // }
+    // cout << pos.back() - pos.front();
+
     CURTIME();
     return 0;
   }  
