@@ -3,7 +3,7 @@
 import requests
 import urllib.parse
 import threading
-from random import choice, shuffle, randint
+from random import choice, shuffle
 from json import loads, dumps
 from getpass import getpass
 from bs4 import BeautifulSoup as bs
@@ -11,7 +11,7 @@ from time import sleep
 
 base = "https://codeforces.com/"
 contestName = input("Name of the contest: ")
-contestDuration = max(int('0' + input("Length (Default 1 Hours): ")), 60)
+contestDuration = max(int('0' + input("Length (Default 60 Minutes): ")), 60)
 numberOfContest = max(int('0' + input("Number of contest you want to combine (Default 1 contest): ")), 1)
 typeOfProblem = input("Type of problem you want to add: ").upper()
 contestLevel = int(input("Div 1 or 2: "))
@@ -112,14 +112,14 @@ with open("ContestList", "r") as f:
       if contestID > 400:
         probList.append(contestID)
 
-have_add = False
-Tproblem = []
 while True:
+
 
   # LIST OF CONTEST THAT HAVE BEEN ADD
   ig = list(map(int, open("ignoreCont").read().split("\n")[:-1]))
 
   # GET CONTEST PROBLEM TYPE
+  Tproblem = []
   for _ in range(numberOfContest):
     while True:
       k = choice(probList)
@@ -130,16 +130,12 @@ while True:
     for t in r.findAll("option"):
       if t["value"] in typeOfProblem and t["value"] != "":
         filt.add(t["value"])
+    filt = sorted(filt)
     for v in filt:
       Tproblem.append(f"{k}{v}")
-    if randint(0, 1) == 1 and have_add == False:
-      Tproblem.append(f"{k}D")
-      have_add = True
       # print(k, r.title.text)
     ig.append(k)
-  if have_add == False:
-    Tproblem.append(f"{ig[-randint(1, 3)]}D")
-    
+  print(ig[-1])
   # IDK, JUST TO MAKE IT MORE FUN ¯\_(ツ)_/¯
   # for _ in range(numberOfContest):
   #   shuffle(Tproblem)
@@ -147,8 +143,9 @@ while True:
   if len(Tproblem) < len(typeOfProblem) * numberOfContest:
     print("Oh i die, what a shame, let's me start over")
   else:
-    makeMS(Tproblem, Token)
+    # makeMS(Tproblem, Token)
     break
+  print("Something wrong")
 
 with open("ignoreCont", "w") as f:
   for i in ig:
