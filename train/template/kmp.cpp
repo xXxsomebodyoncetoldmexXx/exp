@@ -90,19 +90,72 @@ inline ll Pow(ll base, ll exp, ll MOD = (1LL<<62)){
 }
 
 /*  CODE BEGIN FROM HERE  */
-int const maxn = 1e7+7;
-vector<int> div(maxn);
-
-void sieve(){
-  div[1] = 1;
-  for(int i = 2; i*i<= maxn; i++){
-    for(int j = i*i; j <= maxn; j+=i){
-      div[j] += i;
-      int check = j/i;
-      if(check != i)
-        div[j] += check;
+// lpsa
+vector<ll> init(string s){
+  ll n = s.size();
+  ll len = 0;
+  vector<ll> lps(n, 0);
+  ll idx = 1;
+  while(idx < n){
+    // If current character is part of string prefix
+    if(s[idx] == s[len]){
+      len++;
+      lps[idx] = len;
+      idx++;
+    }
+    // If it not equal anymore
+    else{ //s[idx] != s[len]
+      if(len != 0)
+        len = lps[len-1];
+      else
+        lps[idx++] = 0;
     }
   }
+  return lps;
+}
+
+vector<ll> init2(string s){
+  ll n = s.size();
+  vector<ll> lsp(n, 0);
+  ll j;
+  for(ll i = 1; i < n; i++){
+    j = lsp[i-1];
+    while(j > 0 && s[i] != s[j])
+      j = lsp[j-1];
+    if(s[i] == s[j])
+      j++;
+    lsp[i] = j;
+  }
+  return lsp;
+}
+
+vector<ll> kmp(string s, string pat, vector<ll> lsp = vector<ll>(0)){
+  if(lsp.size() == 0)
+    lsp = init(pat);
+  vector<ll> ans;
+  ll n = s.size();
+  ll t = pat.size();
+  ll i, j;
+  i = j = 0;
+  cout << lsp.size() << el;
+  for(auto i : lsp)
+    cout << i << sp;
+  cout << el;
+  while(i < n){
+    if(s[i] == pat[j])  // Have a match
+      i++, j++;
+    if(j == t){         // Full match
+      ans.pb(i-j);
+      j = lsp[j-1];
+    }
+    else if(i < n && pat[j] != s[i]){
+      if(j != 0)  // Go back to the closest prefix
+        j = lsp[j-1];
+      else        // Checking the next character
+        i++;
+    }
+  }
+  return ans;
 }
 
 int main(int argc, char const *argv[]) {
@@ -110,15 +163,17 @@ int main(int argc, char const *argv[]) {
   INFILE("in");
   // OUFILE("out");
 
-  sieve();
-  int a, b;
-  ll sum = 0;
-  cin >> a >> b;
-  for(int i = a; i<=b; i++){
-    // DUMP(div[i]);
-    sum += abs(i - div[i] - 1);
-  }
-  cout << sum;
+  string s, p;
+  cin >> s >> p;
+  vector<ll> check = init2(p);
+  cout << check.size() << el;
+  for(auto i : check)
+    cout << i << sp;
+  exit(0);
+  vector<ll> ret = kmp(s, p, init(p));
+  cout << ret.size() << el;
+  for(auto i : ret)
+    cout << i << sp;
   CURTIME();
   return 0;
 }

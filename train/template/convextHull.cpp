@@ -11,7 +11,7 @@ using namespace std;
 #ifdef LOCAL_PROJECT
   #define CURTIME()         cerr << el << "[TIME]: " << clock() * 1.0 / CLOCKS_PER_SEC << "s" << el
   #define INFILE(name)      freopen(name, "r", stdin)
-  #define OUFILE(name)      freopen(name, "w", stdin)
+  #define OUFILE(name)      freopen(name, "w", stdout)
   #define DEBUG             cerr << "##########\nRunning on Line: " << __LINE__ << "\nIn Function: " <<   __FUNCTION__ << "\n##########\n"
   #define DUMP(value)       cerr << "[" << (#value) << "]: " << (value) << el
 #else
@@ -36,13 +36,13 @@ using namespace std;
 #define prs(n)              cout << fixed << setprecision(n)
 #define el                  "\n"
 #define sp                  " "
-#define ALL(v)              (v).begin(), (v).end()
-#define LXCMP(s, t)         lexicographical_compare(ALL(s), ALL(t))  // s > t
-#define RALL(v)             (v).rbegin(), (v).rend()
+#define all(v)              (v).begin(), (v).end()
+#define rall(v)             (v).rbegin(), (v).rend()
+#define lxcmp(s, t)         lexicographical_compare(ALL(s), ALL(t))  // s > t
 #define MAXVAL(T)           numeric_limits<(T)>::max()
 #define INF(T)              numeric_limits<(T)>::infinity()
-#define MASK(i)             (1LL << (i))
-#define BIT(x, i)           (((x) >> (i)) & 1)
+#define mask(i)             (1LL << (i))
+#define bit(x, i)           (((x) >> (i)) & 1)
 #define div                 ___div
 #define next                ___next
 #define prev                ___prev
@@ -70,88 +70,69 @@ ll nCr(ll n, ll r){
   return n/r;
 }
 
+inline ll mul(ll a, ll b, ll MOD = (1LL<<62)){
+  return ((((a)%MOD)*((b)%MOD))%MOD);
+}
+
+inline ll add(ll a, ll b, ll MOD = (1LL<<62)){
+  return ((((a)%MOD)+((b)%MOD))%MOD);
+}
+
+inline ll Pow(ll base, ll exp, ll MOD = (1LL<<62)){
+  ll ans = 1;
+  while(exp){
+    if(exp & 1)
+      ans = (ans*base)%MOD;
+    exp >>= 1;
+    base = (base*base)%MOD;
+  }
+  return ans;
+}
+
 /*  CODE BEGIN FROM HERE  */
 
-vector<ll> Z(string s){
-  ll L, R, n;
-  n = s.size();
-  vector<ll> z(n, 0);
-  L = R = 0;
-  for(ll i = 1; i < n; i++){
-    if(i > R){
-      L = R = i;
-      while(R < n && s[R-L] == s[R]) R++;
-      z[i] = R-L; R--;
-    }
-    else{
-      ll k = i - L;
-      if(z[k]+i < R+1) z[i] = z[k];
-      else{
-        L = i;
-        while(R < n && s[R-L] == s[R]) R++;
-        z[i] = R-L; R--;
-      }
-    }
-  }
-  return z;
+ll cross(const pair<ll, ll> &O, const pair<ll, ll> &A, const pair<ll, ll> &B){
+  return ((A.fi - O.fi)*(B.se - O.se) - (A.se - O.se)*(B.fi - O.fi));
 }
 
+vector<pair<ll, ll>> convexHull(vector<pair<ll, ll>> &points){
+  ll n = points.size();
+  if(n < 4)
+    return points;
+  ll k = 0;
+  vector<pair<ll, ll>> H(2*n);
+  sort(all(points));
 
-vector<ll> newZ(string s){
-  ll L, R, n, k;
-  n = s.size();
-  vector<ll> z(n, 0);
-  L = R = 0;
-  for(ll i = 1; i < n; i++){
-    if(i > R){
-      L = R = i;
-      while(R < n && s[R-L] == s[R]) R++;
-      z[i] = R - L; R--;
-    }
-    else{
-      k = i - L;
-      if(z[k] < R - i + 1) z[i] = z[k];
-      else{
-        L = i;
-        while(R < n && s[R-L] == s[R]) R++;
-        z[i] = R - L; R--;
-      }
-    }
+  for(ll i = 0; i < n; i++){
+    while(k > 1 && cross(H[k-2], H[k-1], points[i]) <= 0)
+      k--;
+    H[k++] = points[i];
   }
-  return z;
-}
 
-// https://codeforces.com/contest/126/problem/B
+  for(ll i = n-1, t = k+1; i > 0; --i){
+    while(k >= t && cross(H[k-2], H[k-1], points[i-1]) <= 0)
+      k--;
+    H[k++] = points[i-1];
+  }
+  H.resize(k-1);
+  return H;
+}
 
 int main(int argc, char const *argv[]) {
   FASTIO;
   INFILE("in");
   // OUFILE("out");
 
-  string s;
-  cin >> s;
-  // cout << s << el;
-  vector<ll> z = Z(s);
-  for(auto i : z)
-    cout << i << sp;
-  cout << el;
-  z = newZ(s);
-  for(auto i : z)
-    cout << i << sp;
-  CURTIME();
-  exit(0);
-  ll mx = -1;
-  ll n = s.size();
-  for(ll i = 1; i < n; i++){
-    // DUMP(z[i]);
-    if(z[i] == n-i && mx >= z[i]){
-      for(ll j = i; j < i+z[i]; j++)
-        cout << s[j];
-      exit(0);
-    }
-    mx = max(mx, z[i]);
-  }
-  cout << "Just a legend";
+  ll n;
+  cin >> n;
+  vector<pair<ll, ll>> v(n);
+  for(auto &i : v)
+    cin >> i.fi >> i.se;
+  vector<pair<ll, ll>> conv = convexHull(v);
+  cout << conv.size() << el;
+  for(auto i : conv)
+    cout << i.fi << sp << i.se << el;
+  
   CURTIME();
   return 0;
 }

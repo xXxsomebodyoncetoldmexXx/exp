@@ -36,13 +36,13 @@ using namespace std;
 #define prs(n)              cout << fixed << setprecision(n)
 #define el                  "\n"
 #define sp                  " "
-#define ALL(v)              (v).begin(), (v).end()
-#define LXCMP(s, t)         lexicographical_compare(ALL(s), ALL(t))  // s > t
-#define RALL(v)             (v).rbegin(), (v).rend()
+#define all(v)              (v).begin(), (v).end()
+#define rall(v)             (v).rbegin(), (v).rend()
+#define lxcmp(s, t)         lexicographical_compare(ALL(s), ALL(t))  // s > t
 #define MAXVAL(T)           numeric_limits<(T)>::max()
 #define INF(T)              numeric_limits<(T)>::infinity()
-#define MASK(i)             (1LL << (i))
-#define BIT(x, i)           (((x) >> (i)) & 1)
+#define mask(i)             (1LL << (i))
+#define bit(x, i)           (((x) >> (i)) & 1)
 #define div                 ___div
 #define next                ___next
 #define prev                ___prev
@@ -70,88 +70,85 @@ ll nCr(ll n, ll r){
   return n/r;
 }
 
+inline ll mul(ll a, ll b, ll MOD = (1LL<<62)){
+  return ((((a)%MOD)*((b)%MOD))%MOD);
+}
+
+inline ll add(ll a, ll b, ll MOD = (1LL<<62)){
+  return ((((a)%MOD)+((b)%MOD))%MOD);
+}
+
+inline ll Pow(ll base, ll exp, ll MOD = (1LL<<62)){
+  ll ans = 1;
+  while(exp){
+    if(exp & 1)
+      ans = (ans*base)%MOD;
+    exp >>= 1;
+    base = (base*base)%MOD;
+  }
+  return ans;
+}
+
 /*  CODE BEGIN FROM HERE  */
+ll const maxn = 1000 * 1000 + 7;
+ll const maxlog = 50;
 
-vector<ll> Z(string s){
-  ll L, R, n;
-  n = s.size();
-  vector<ll> z(n, 0);
-  L = R = 0;
-  for(ll i = 1; i < n; i++){
-    if(i > R){
-      L = R = i;
-      while(R < n && s[R-L] == s[R]) R++;
-      z[i] = R-L; R--;
-    }
-    else{
-      ll k = i - L;
-      if(z[k]+i < R+1) z[i] = z[k];
-      else{
-        L = i;
-        while(R < n && s[R-L] == s[R]) R++;
-        z[i] = R-L; R--;
-      }
-    }
-  }
-  return z;
+vector<ll> logs;
+ll table[maxlog][maxn];
+
+// Preprocess
+void compLog(){
+  logs.pb(0);
+  logs.pb(0);
+  for(ll i = 2; i <= maxn; i++)
+    logs.pb(logs[i/2]+1);
 }
 
-
-vector<ll> newZ(string s){
-  ll L, R, n, k;
-  n = s.size();
-  vector<ll> z(n, 0);
-  L = R = 0;
-  for(ll i = 1; i < n; i++){
-    if(i > R){
-      L = R = i;
-      while(R < n && s[R-L] == s[R]) R++;
-      z[i] = R - L; R--;
-    }
-    else{
-      k = i - L;
-      if(z[k] < R - i + 1) z[i] = z[k];
-      else{
-        L = i;
-        while(R < n && s[R-L] == s[R]) R++;
-        z[i] = R - L; R--;
-      }
-    }
-  }
-  return z;
+inline ll f(ll x, ll y){
+  return max(x, y);
 }
 
-// https://codeforces.com/contest/126/problem/B
+// Build
+void buildST(vector<ll> v){
+  ll n = v.size();
+  for(ll i = 0; i < logs[n]; i++){
+    ll curLen = 1<<i;
+    for(ll j = 0; j + curLen <= n; j++){
+      if(curLen == 1)
+        table[i][j] = v[j];
+      else
+        table[i][j] = f(table[i-1][j], table[i-1][j + (curLen/2)]);
+    }
+  }
+}
+
+// Query
+ll get(ll L, ll R){
+  ll p = logs[R - L + 1];
+  ll pLen = 1 << p;
+  return f(table[p][L], table[p][R - pLen + 1]);
+}
 
 int main(int argc, char const *argv[]) {
   FASTIO;
   INFILE("in");
   // OUFILE("out");
 
-  string s;
-  cin >> s;
-  // cout << s << el;
-  vector<ll> z = Z(s);
-  for(auto i : z)
-    cout << i << sp;
-  cout << el;
-  z = newZ(s);
-  for(auto i : z)
-    cout << i << sp;
-  CURTIME();
-  exit(0);
-  ll mx = -1;
-  ll n = s.size();
-  for(ll i = 1; i < n; i++){
-    // DUMP(z[i]);
-    if(z[i] == n-i && mx >= z[i]){
-      for(ll j = i; j < i+z[i]; j++)
-        cout << s[j];
-      exit(0);
-    }
-    mx = max(mx, z[i]);
+  compLog();
+  ll n;
+  cin >> n;
+  vector<ll> v(n);
+  ll idx = 0;
+  for(auto &i : v){
+    cin >> i;
+    cout << logs[idx++] << el;
   }
-  cout << "Just a legend";
+  buildST(v);
+  for(ll i = 0; i < 5; i++)
+    for(ll j = 0; j < v.size(); j++)
+      cout << table[i][j] << " \n"[j+1 == v.size()];
+  cout << get(1, 4);
+
   CURTIME();
   return 0;
 }
