@@ -6,4 +6,7 @@ if not [%1]==[] (
 		echo [RUN]
 		a.exe
 	)
-) else (echo "[USAGE]: car <file.cpp>")
+) else (
+	echo "[USAGE]: car <file.cpp>"
+	pause
+)
