@@ -21,9 +21,10 @@ pushd D:\Repo\exp\codeforces\%folderName%
 
 ::CREATE CONTEST FILES
 set /P in="Number of problems (Default is 4): "
-set /A numOfFile=%in%
-if !numOfFile!==0 (
-	set /A numOfFile = 4
+if "%in%"=="" ( 
+	set /A numOfFile = 4 
+) else ( 
+	set /A numOfFile=%in%
 )
 for /L %%i in (1, 1, %numOfFile%) do (
   type nul > !prob[%%i]!.cpp
