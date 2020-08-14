@@ -10,5 +10,4 @@ if not [%1]==[] (
 	)
 ) else (
 	echo "[USAGE]: car <file.cpp>"
-	pause
 )
