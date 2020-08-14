@@ -11,11 +11,11 @@ const double esp = 1e-9;
 using namespace std;
   
 #ifdef LOCAL_PROJECT
-  #define CURTIME()         cerr << el << "[TIME]: " << clock() * 1.0 / CLOCKS_PER_SEC << "s" << el
+  #define CURTIME()         cerr << nl << "[TIME]: " << clock() * 1.0 / CLOCKS_PER_SEC << "s" << nl
   #define INFILE(name)      freopen(name, "r", stdin)
   #define OUFILE(name)      freopen(name, "w", stdin)
   #define DEBUG             cerr << "##########\nRunning on Line: " << __LINE__ << "\nIn Function: " <<   __FUNCTION__ << "\n##########\n"
-  #define DUMP(value)       cerr << "[" << (#value) << "]: " << (value) << el
+  #define DUMP(value)       cerr << "[" << (#value) << "]: " << (value) << nl
 #else
   #define CURTIME()         ;
   #define INFILE(name)      ;
@@ -36,10 +36,10 @@ using namespace std;
 #define lb                  lower_bound
 #define ub                  upper_bound
 #define prs(n)              cout << fixed << setprecision(n)
-#define el                  "\n"
+#define nl                  "\n"
 #define sp                  " "
-#define ALL(v)              (v).begin(), (v).end()
-#define LXCMP(s, t)         lexicographical_compare(ALL(s), ALL(t))  // s > t
+#define all(v)              (v).begin(), (v).end()
+#define LXCMP(s, t)         lexicographical_compare(all(s), all(t))  // s > t
 #define RALL(v)             (v).rbegin(), (v).rend()
 #define MAXVAL(T)           numeric_limits<(T)>::max()
 #define INF(T)              numeric_limits<(T)>::infinity()
