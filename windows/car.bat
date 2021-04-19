@@ -7,6 +7,7 @@ if not [%1]==[] (
   if !ERRORLEVEL! == 0 (
 		echo [RUN]
 		a.exe
+		del a.exe
 	)
 ) else (
 	echo "[USAGE]: car <file.cpp>"
